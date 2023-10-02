@@ -1,0 +1,57 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class GradeBookTester {
+	GradeBook grade1;
+	GradeBook grade2;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		grade1 = new GradeBook(5);
+		grade2 = new GradeBook(5);
+		grade1.addScore(90.0);
+		grade2.addScore(75.0);
+		grade1.addScore(60.0);
+		grade2.addScore(20.0);
+		grade1.addScore(50.0);
+		grade2.addScore(63.0);
+		grade1.addScore(38.0);
+		grade2.addScore(55.0);
+		grade1.addScore(45.0);
+		grade2.addScore(95.0);
+	}
+	
+	@AfterEach
+	void tearDown() throws Exception {
+		grade1 = null;
+		grade2 = null;	
+	}
+	
+	@Test
+	void testAddScore() {
+		assertTrue(grade1.toString().equals("90.0 60.0 50.0 38.0 45.0 "));
+		assertTrue(grade2.toString().equals("75.0 20.0 63.0 55.0 95.0 "));
+	}
+	
+	@Test
+	void testSum() {
+		assertEquals(283.0, grade1.sum(), 0.001);
+		assertEquals(308.0, grade2.sum(), 0.001);
+
+	}
+	
+	@Test
+	void testMinimum() {
+		assertEquals(38.0, grade1.minimum(), .001); 
+		assertEquals(20.0, grade2.minimum(), .001); 
+	}
+
+	@Test
+	void testFinalScore() {
+		assertEquals(245.0 , grade1.finalScore());
+		assertEquals(288.0 , grade2.finalScore());
+	}
+}
